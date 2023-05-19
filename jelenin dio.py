@@ -1,35 +1,47 @@
 def ispisiGCODE():
       f = open('output_0001.ngc', 'r')
       Lines = f.readlines()
-      for i in range(14):
-            Lines.remove(Lines[i])
       koordinate = []
-      for i in range(len(Lines)):
-            linija = Lines[i]
-            if linija[0:3] == 'G01':
-                  xy = []
-                  x = float(linija[5:8])
-                  y = float(linija[17:20])
-                  xy.append(x)
-                  xy.append(y)
-                  xy.append('G01')
-                  koordinate.append(xy)
-            elif linija[0:3] == 'G02':
-                  xy = []
-                  x = float(linija[5:8])
-                  y = float(linija[17:20])
-                  xy.append(x)
-                  xy.append(y)
-                  xy.append('G02')
-                  koordinate.append(xy)
-            elif linija[0:3] == 'G03':
-                  xy = []
-                  x = float(linija[5:8])
-                  y = float(linija[17:20])
-                  xy.append(x)
-                  xy.append(y)
-                  xy.append('G03')
-                  koordinate.append(xy)
+      for t in range(len(Lines)):
+            linija = Lines[t]
+            linija = linija.split()
+            if len(linija) != 0:
+                  if linija[0] == 'G01' and linija[1][0] == 'X': 
+                        xy = []
+                        x = float(linija[1][1:5])
+                        y = float(linija[2][1:5])
+                        xy.append(x)
+                        xy.append(y)
+                        xy.append('G01')
+                        koordinate.append(xy)
+                  elif linija[0] == 'G02':
+                        xy = []
+                        centerpoint = []
+                        x = float(linija[1][1:5])
+                        y = float(linija[2][1:5])
+                        i = float(linija[4][1:5])
+                        j = float(linija[5][1:5])
+                        centerpoint.append(i)
+                        centerpoint.append(j)
+                        xy.append(x)
+                        xy.append(y)
+                        xy.append('G02')
+                        xy.append(centerpoint)
+                        koordinate.append(xy)
+                  elif linija[0] == 'G03':
+                        xy = []
+                        centerpoint = []
+                        x = float(linija[1][1:5])
+                        y = float(linija[2][1:5])
+                        i = float(linija[4][1:5])
+                        j = float(linija[5][1:5])
+                        centerpoint.append(i)
+                        centerpoint.append(j)
+                        xy.append(x)
+                        xy.append(y)
+                        xy.append('G03')
+                        xy.append(centerpoint)
+                        koordinate.append(xy)
       return koordinate
 
 
